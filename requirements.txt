@@ -8,3 +8,8 @@ streamlit
 nbformat
 kaleido 
 statsmodels
+shap
+imblearn
+joblib
+tqdm
+xgboost
