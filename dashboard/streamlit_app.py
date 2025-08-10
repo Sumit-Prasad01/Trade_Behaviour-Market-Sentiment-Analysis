@@ -15,9 +15,9 @@ sns.set_style("whitegrid")
 # ==========================
 @st.cache_data
 def load_default_data():
-    trades = pd.read_csv("../data/preprocessed/historical_data/cleaned_historical_data.csv", parse_dates=['date'])
-    sentiment = pd.read_csv("../data/preprocessed/sentiment_data/sentiment_clean.csv", parse_dates=['date'])
-    merged = pd.read_csv("../data/Merged Data/merged_trades_sentiment.csv", parse_dates=['date'])
+    trades = pd.read_csv("data/preprocessed/historical_data/cleaned_historical_data.csv", parse_dates=['date'])
+    sentiment = pd.read_csv("data/preprocessed/sentiment_data/sentiment_clean.csv", parse_dates=['date'])
+    merged = pd.read_csv("data/Merged Data/merged_trades_sentiment.csv", parse_dates=['date'])
     return trades, sentiment, merged
 
 def load_uploaded_data(uploaded_file):
@@ -85,16 +85,16 @@ with tab1:
 
     col1, col2, col3 = st.columns(3)
     col1.metric("Total Trades", len(df))
-    col2.metric("Unique Accounts", df['Account'].nunique())
-    col3.metric("Avg Closed PnL", f"{df['Closed PnL'].mean():.2f}")
+    col2.metric("Unique Accounts", df['account'].nunique())
+    col3.metric("Avg Closed PnL", f"{df['closed_pnl'].mean():.2f}")
 
     fig, ax = plt.subplots()
-    sns.histplot(df['Closed PnL'], bins=50, kde=True, ax=ax)
+    sns.histplot(df['closed_pnl'], bins=50, kde=True, ax=ax)
     ax.set_title("Closed PnL Distribution")
     st.pyplot(fig)
 
     fig, ax = plt.subplots()
-    df.groupby('date')['Closed PnL'].mean().plot(ax=ax)
+    df.groupby('date')['closed_pnl'].mean().plot(ax=ax)
     ax.set_title("Daily Average PnL")
     st.pyplot(fig)
 
@@ -127,12 +127,12 @@ with tab3:
     df = merged_df if "uploaded_df" not in st.session_state else st.session_state["uploaded_df"]
 
     fig, ax = plt.subplots()
-    df.groupby('classification')['Closed PnL'].mean().plot(kind='bar', ax=ax)
+    df.groupby('classification')['closed_pnl'].mean().plot(kind='bar', ax=ax)
     ax.set_title("Average PnL by Sentiment Classification")
     st.pyplot(fig)
 
     fig, ax = plt.subplots()
-    sns.scatterplot(x='value', y='Closed PnL', data=df, ax=ax)
+    sns.scatterplot(x='value', y='closed_pnl', data=df, ax=ax)
     ax.set_title("Sentiment Score vs Closed PnL")
     st.pyplot(fig)
 
