@@ -141,5 +141,9 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
+```
 
+### Streamlit App
+- App Link - https://sumit-prasad01-trade-behaviour-ma-dashboardstreamlit-app-o97aco.streamlit.app/
 
+####*** This App does not contain full features of project (analysis).This is just for demo.***####
